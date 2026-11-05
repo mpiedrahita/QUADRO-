@@ -30,14 +30,15 @@ Los ID PU-01 a PU-08 y PI-01 a PI-07 son los del plan del Entregable 2; los sigu
 
 ## 4. Resumen de resultados
 
-| Nivel | Pruebas | Pasaron | Fallaron | Duración |
-|---|---|---|---|---|
-| Unitarias | 37 | 37 | 0 | 12,9 s en total para unitarias e integración, con medición de cobertura |
-| Integración | 46 | 46 | 0 | (incluido arriba) |
-| E2E escritorio | 15 | 15 | 0 | 31,5 s en total para las 16 E2E, incluida la compilación previa |
-| E2E celular | 1 | 1 | 0 | (incluido arriba) |
-| **Total** | **99** | **99** | **0** | |
-| ESLint (backend y frontend) | — | Sin errores ni advertencias | — | — |
+| Nivel | Pruebas | Pasaron | Fallaron |
+|---|---|---|---|
+| Unitarias | 37 | 37 | 0 |
+| Integración | 46 | 46 | 0 |
+| E2E escritorio | 15 | 15 | 0 |
+| E2E celular | 1 | 1 | 0 |
+| **Total** | **99** | **99** | **0** |
+
+Las unitarias y de integración tardaron 12,9 s con medición de cobertura; las 16 E2E, 31,5 s con la compilación del frontend. ESLint terminó sin errores ni advertencias en el backend y el frontend.
 
 ### 4.1 Cobertura del backend (V8)
 

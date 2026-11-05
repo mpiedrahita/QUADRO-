@@ -9,3 +9,4 @@ coverage/
 e2e/output/
 e2e/.tmp/
 server/tests/reports/*.tmp
+server/tests/reports/

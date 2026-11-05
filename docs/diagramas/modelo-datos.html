@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#F6F3EB}svg text{font-family:'Schibsted Grotesk',system-ui,sans-serif}</style>
+<link rel="stylesheet" href="../../node_modules/@fontsource-variable/schibsted-grotesk/index.css"></head><body>
+<svg width="1400" height="980" viewBox="0 0 1400 980" xmlns="http://www.w3.org/2000/svg" font-size="14" fill="#292D32">
+<text x="50" y="56" font-size="30" font-weight="800" fill="#183B35">Modelo de datos de Quadro (PostgreSQL)</text>
+<g id="tablas"></g>
+</svg>
+<script>
+const T={
+ usuario:{x:50,y:100,c:['id UUID PK','nombre VARCHAR(80)','correo VARCHAR(120) UNIQUE','contrasena_hash TEXT','fecha_registro TIMESTAMPTZ']},
+ grupo:{x:50,y:420,c:['id UUID PK','nombre VARCHAR(80)','descripcion VARCHAR(255)','estado ACTIVO | ARCHIVADO','creado_por FK usuario','fecha_creacion TIMESTAMPTZ']},
+ participacion:{x:420,y:100,c:['id UUID PK','grupo_id FK grupo','usuario_id FK usuario','rol ADMINISTRADOR | INTEGRANTE','estado ACTIVA | RETIRADA','fecha_ingreso, fecha_retiro','UNIQUE (grupo_id, usuario_id)']},
+ categoria:{x:50,y:700,c:['id UUID PK','grupo_id FK grupo','nombre VARCHAR(40)','UNIQUE (grupo_id, lower(nombre))']},
+ gasto:{x:420,y:420,c:['id UUID PK','grupo_id FK grupo','descripcion VARCHAR(120)','importe INTEGER > 0','fecha DATE','categoria_id FK categoria','pagador_id FK participacion','metodo_distribucion IGUAL | PORCENTAJE | VALOR','estado REGISTRADO | MODIFICADO | ANULADO','registrado_por FK participacion','fecha_registro, fecha_modificacion, fecha_anulacion']},
+ reparto_gasto:{x:860,y:100,c:['id UUID PK','gasto_id FK gasto','participacion_id FK participacion','importe_asignado INTEGER ≥ 0','porcentaje NUMERIC(5,2)','UNIQUE (gasto_id, participacion_id)']},
+ liquidacion:{x:860,y:400,c:['id UUID PK','grupo_id FK grupo','emisor_id FK participacion','receptor_id FK participacion','importe INTEGER > 0','fecha DATE','nota VARCHAR(120)','estado REGISTRADA | ANULADA','registrado_por FK participacion','CHECK emisor_id ≠ receptor_id']},
+ comprobante:{x:860,y:720,c:['id UUID PK','gasto_id FK gasto','nombre_archivo, tipo_mime','tamano_bytes ≤ 2 MB','contenido BYTEA','subido_por FK participacion']},
+};
+const ns='http://www.w3.org/2000/svg', g=document.getElementById('tablas'), W={usuario:320,grupo:320,participacion:380,categoria:320,gasto:400,reparto_gasto:420,liquidacion:420,comprobante:420};
+const el=(t,a,txt)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;g.appendChild(e);return e};
+const caja={};
+const rel=[['usuario','participacion','1','0..*'],['grupo','participacion','1','1..*'],['grupo','gasto','1','0..*'],['grupo','categoria','1','0..*'],['participacion','gasto','1','0..*  pagador'],['gasto','reparto_gasto','1','1..*',0.22],['participacion','reparto_gasto','1','0..*'],['participacion','liquidacion','1','0..*  emisor/receptor'],['gasto','comprobante','1','0..5'],['categoria','gasto','1','0..*']];
+for(const [n,t] of Object.entries(T)){const w=W[n],h=44+t.c.length*24;caja[n]={x:t.x,y:t.y,w,h};}
+// Punto donde la línea entre dos centros cruza el borde de la caja.
+const borde=(C,tx,ty)=>{const cx=C.x+C.w/2,cy=C.y+C.h/2,dx=tx-cx,dy=ty-cy;const k=Math.min(Math.abs((C.w/2)/(dx||1e-9)),Math.abs((C.h/2)/(dy||1e-9)));return [cx+dx*k,cy+dy*k];};
+const lineas=[];
+for(const [a,b,ma,mb,pos=0.5] of rel){const A=caja[a],B=caja[b];const [ax,ay]=borde(A,B.x+B.w/2,B.y+B.h/2),[bx,by]=borde(B,A.x+A.w/2,A.y+A.h/2);lineas.push([ax,ay,bx,by,ma,mb,pos]);}
+for(const [n,t] of Object.entries(T)){const {x,y,w,h}=caja[n];
+ el('rect',{x,y,width:w,height:h,rx:10,fill:'#FFFDF8',stroke:'#183B35','stroke-width':1.5});
+ el('rect',{x,y,width:w,height:36,rx:10,fill:'#183B35'});el('rect',{x,y:y+26,width:w,height:10,fill:'#183B35'});
+ el('text',{x:x+14,y:y+24,fill:'#F6F3EB','font-weight':700,'font-size':16},n);
+ t.c.forEach((c,i)=>el('text',{x:x+14,y:y+58+i*24,fill:c.includes('PK')?'#8A5410':'#292D32','font-weight':c.includes('PK')?700:400},c));}
+for(const [ax,ay,bx,by,ma,mb,pos] of lineas){
+ el('line',{x1:ax,y1:ay,x2:bx,y2:by,stroke:'#E5A85B','stroke-width':3});
+ el('circle',{cx:ax,cy:ay,r:4,fill:'#183B35'});el('circle',{cx:bx,cy:by,r:4,fill:'#183B35'});
+ const tx=bx+(ax-bx)*pos, ty=by+(ay-by)*pos;
+ const t=el('text',{x:tx,y:ty+4,'font-size':12,fill:'#183B35','font-weight':700,'text-anchor':'middle'},'1 → '+mb);
+ const bb=t.getBBox(); const r=el('rect',{x:bb.x-5,y:bb.y-2,width:bb.width+10,height:bb.height+4,rx:4,fill:'#F6F3EB',stroke:'#E5A85B'}); g.insertBefore(r,t);}
+el('text',{x:50,y:945,'font-size':14,fill:'#5E6168'},'Cada línea es una relación uno a muchos: "1 → 0..*" se lee desde la tabla de arriba o de la izquierda hacia la otra.');
+el('text',{x:50,y:967,'font-size':14,fill:'#5E6168'},'liquidacion.grupo_id y comprobante.subido_por también son claves foráneas. Borrar un grupo borra en cascada sus datos.');
+</script></body></html>

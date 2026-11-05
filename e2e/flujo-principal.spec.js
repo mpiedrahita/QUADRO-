@@ -139,7 +139,7 @@ test('E2E-07 · HU-08, RNF-09: adjuntar un comprobante a un gasto', async () => 
   await dialogo.getByRole('button', { name: 'Cerrar' }).click();
 });
 
-test('E2E-08 · HU-07, RF-12: el historial se filtra por categoría y participante', async () => {
+test('E2E-08 · HU-07, RF-12: el historial se filtra por categoría', async () => {
   await page.getByLabel('Categoría').selectOption({ label: 'Herramientas' });
   await expect(page.locator('.gasto')).toHaveCount(1);
   await expect(page.locator('.gasto').first()).toContainText('Plancha eléctrica para asar');

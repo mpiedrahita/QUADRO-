@@ -20,7 +20,8 @@ export const METODOS = Object.freeze(['IGUAL', 'PORCENTAJE', 'VALOR']);
 export const IMPORTE_MAXIMO = 1_000_000_000;
 
 const formatoPesos = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
-export const pesos = (valor) => formatoPesos.format(valor);
+/** Formato colombiano sin espacio después del signo: $100.000 (igual que en la interfaz). */
+export const pesos = (valor) => formatoPesos.format(valor).replace(/\s/g, '');
 
 /** Valida que el importe sea un entero positivo dentro del límite permitido. */
 export function validarImporte(importe) {

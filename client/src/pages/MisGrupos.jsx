@@ -41,7 +41,10 @@ export function FormularioGrupo({ inicial, alGuardar, alCancelar, textoBoton }) 
       <CampoTexto
         etiqueta="Nombre del grupo o emprendimiento"
         value={datos.nombre}
-        onChange={(e) => setDatos({ ...datos, nombre: e.target.value })}
+        onChange={(e) => {
+          setErrores(({ nombre: _omitido, ...resto }) => resto);
+          setDatos({ ...datos, nombre: e.target.value });
+        }}
         error={errores.nombre}
         placeholder="Ej.: Arepas La Esquina"
         maxLength={80}

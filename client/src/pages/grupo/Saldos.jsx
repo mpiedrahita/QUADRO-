@@ -157,9 +157,19 @@ export default function Saldos() {
               return (
                 <li key={`${d.deudorId}-${d.acreedorId}`} className="deuda">
                   <span>
-                    <strong>{d.deudorId === miParticipacionId ? 'Tú' : d.deudor}</strong>{' '}
-                    {d.deudorId === miParticipacionId ? 'le debes a' : 'le debe a'}{' '}
-                    <strong>{d.acreedorId === miParticipacionId ? 'ti' : d.acreedor}</strong>
+                    {d.deudorId === miParticipacionId ? (
+                      <>
+                        Le debes a <strong>{d.acreedor}</strong>
+                      </>
+                    ) : d.acreedorId === miParticipacionId ? (
+                      <>
+                        <strong>{d.deudor}</strong> te debe
+                      </>
+                    ) : (
+                      <>
+                        <strong>{d.deudor}</strong> le debe a <strong>{d.acreedor}</strong>
+                      </>
+                    )}
                   </span>
                   <span className="cifra deuda__valor">{formatoPesos(d.importe)}</span>
                   {puede && (

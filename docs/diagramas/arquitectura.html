@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#F6F3EB;font-family:'Schibsted Grotesk',system-ui,sans-serif}
+svg text{font-family:'Schibsted Grotesk',system-ui,sans-serif}
+</style><link rel="stylesheet" href="../../node_modules/@fontsource-variable/schibsted-grotesk/index.css"></head><body>
+<svg width="1400" height="860" viewBox="0 0 1400 860" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#292D32"/></marker></defs>
+<text x="60" y="62" font-size="30" font-weight="800" fill="#183B35">Arquitectura de Quadro · cliente-servidor en tres capas</text>
+<!-- capa presentación -->
+<rect x="60" y="100" width="1280" height="170" rx="16" fill="#DCE9DF"/>
+<text x="84" y="134" font-size="20" font-weight="700" fill="#183B35">Presentación · navegador (computador o celular)</text>
+<text x="84" y="160" font-size="15" fill="#292D32">React 19 + React Router · Vite 8 · CSS con tokens de la identidad Quadro</text>
+<g font-size="15" fill="#183B35" font-weight="600">
+<rect x="84" y="182" width="190" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="179" y="219" text-anchor="middle">Acceso</text>
+<rect x="290" y="182" width="190" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="385" y="219" text-anchor="middle">Mis grupos</text>
+<rect x="496" y="182" width="190" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="591" y="212" text-anchor="middle">Saldos y</text><text x="591" y="232" text-anchor="middle">balanza</text>
+<rect x="702" y="182" width="190" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="797" y="212" text-anchor="middle">Gastos, reparto</text><text x="797" y="232" text-anchor="middle">y comprobantes</text>
+<rect x="908" y="182" width="190" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="1003" y="219" text-anchor="middle">Liquidaciones</text>
+<rect x="1114" y="182" width="202" height="62" rx="10" fill="#FFFDF8" stroke="#183B35"/><text x="1215" y="212" text-anchor="middle">Integrantes y</text><text x="1215" y="232" text-anchor="middle">categorías</text>
+</g>
+<line x1="700" y1="272" x2="700" y2="322" stroke="#292D32" stroke-width="2" marker-end="url(#f)"/>
+<text x="716" y="303" font-size="14" fill="#292D32">HTTPS · JSON · cookie de sesión httpOnly (JWT)</text>
+<!-- capa lógica -->
+<rect x="60" y="326" width="1280" height="330" rx="16" fill="#183B35"/>
+<text x="84" y="360" font-size="20" font-weight="700" fill="#F6F3EB">Lógica de negocio · API REST (Node.js 22 + Express 5)</text>
+<text x="84" y="386" font-size="15" fill="#B9C9C1">Middlewares: Helmet · límite de intentos · sesión (RNF-01) · membresía del grupo (RNF-04) · validación Zod (RNF-05) · manejo central de errores</text>
+<g font-size="14" fill="#292D32">
+<rect x="84" y="406" width="1232" height="44" rx="8" fill="#F6F3EB"/>
+<text x="104" y="434" font-weight="700">Módulos (rutas → controlador → servicio → repositorio):</text>
+<text x="500" y="434">auth · grupos · participantes · categorias · gastos · saldos · liquidaciones · comprobantes</text>
+</g>
+<rect x="84" y="468" width="600" height="160" rx="12" fill="#E5A85B"/>
+<text x="104" y="500" font-size="17" font-weight="700" fill="#292D32">Dominio (funciones puras, pruebas unitarias)</text>
+<text x="104" y="530" font-size="15" fill="#292D32">reparto.js: partes iguales, porcentajes, valores y regla de redondeo</text>
+<text x="104" y="556" font-size="15" fill="#292D32">saldos.js: aportado, asignado, liquidado, saldo y deudas por par</text>
+<text x="104" y="590" font-size="14" fill="#292D32">La interfaz reutiliza reparto.js para la vista previa;</text>
+<text x="104" y="610" font-size="14" fill="#292D32">el servidor siempre vuelve a validar.</text>
+<rect x="708" y="468" width="608" height="160" rx="12" fill="#2E6B5E"/>
+<text x="728" y="500" font-size="17" font-weight="700" fill="#F6F3EB">Reglas de servicio</text>
+<text x="728" y="530" font-size="15" fill="#F6F3EB">Permisos: administrador, quien registró, emisor/receptor (RNF-02)</text>
+<text x="728" y="556" font-size="15" fill="#F6F3EB">Transacciones con bloqueo del grupo al guardar gasto + repartos</text>
+<text x="728" y="582" font-size="15" fill="#F6F3EB">Comprobantes: tipo por firma del archivo, máx. 2 MB (RNF-09)</text>
+<text x="728" y="608" font-size="15" fill="#F6F3EB">Saldos calculados siempre desde los movimientos vigentes</text>
+<line x1="700" y1="658" x2="700" y2="708" stroke="#292D32" stroke-width="2" marker-end="url(#f)"/>
+<text x="716" y="689" font-size="14" fill="#292D32">SQL parametrizado (pg) · pool de conexiones · transacciones</text>
+<!-- persistencia -->
+<rect x="60" y="712" width="1280" height="118" rx="16" fill="#FFFDF8" stroke="#183B35" stroke-width="2"/>
+<text x="84" y="746" font-size="20" font-weight="700" fill="#183B35">Persistencia · PostgreSQL 16</text>
+<text x="84" y="774" font-size="15" fill="#292D32">usuario · grupo · participacion · categoria · gasto · reparto_gasto · liquidacion · comprobante (archivo en BYTEA)</text>
+<text x="84" y="800" font-size="15" fill="#292D32">Claves foráneas, restricciones CHECK y UNIQUE · migraciones SQL versionadas (schema_migraciones)</text>
+</svg></body></html>

@@ -14,7 +14,7 @@ const FILTROS_VACIOS = { desde: '', hasta: '', categoriaId: '', participanteId: 
 
 /** HU-07 · RF-12: historial de gastos con filtros por fecha, categoría y participante. */
 export default function Gastos() {
-  const { grupoId, categorias, participantes, miParticipacionId } = useGrupo();
+  const { grupoId, categorias, participantes, miParticipacionId, recargarLista } = useGrupo();
   const avisar = useAvisos();
   const [filtros, setFiltros] = useState(FILTROS_VACIOS);
   const [abierto, setAbierto] = useState(null);
@@ -129,6 +129,7 @@ export default function Gastos() {
         alCerrar={() => setAbierto(null)}
         alCambiar={(texto) => {
           recargar();
+          recargarLista();
           if (texto) avisar(texto);
         }}
       />

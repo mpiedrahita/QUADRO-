@@ -1,0 +1,48 @@
+# Integración continua: se ejecuta en cada push y pull request a main y develop.
+# Corre el lint, las pruebas unitarias y de integración (con PostgreSQL) y las pruebas E2E.
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: quadro_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quadro_test
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quadro_test
+      E2E_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quadro_e2e
+      JWT_SECRET: secreto_de_integracion_continua_de_al_menos_32_caracteres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:report --workspace server
+      - name: Crear base de datos E2E
+        run: PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE quadro_e2e;"
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build && npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reportes-de-pruebas
+          path: |
+            server/tests/reports
+            e2e/output

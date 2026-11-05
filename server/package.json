@@ -12,8 +12,9 @@
     "test": "vitest run",
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
-    "test:report": "vitest run --reporter=default --reporter=junit --reporter=json --outputFile.junit=tests/reports/junit.xml --outputFile.json=tests/reports/resultados.json",
-    "lint": "eslint src tests"
+    "test:report": "vitest run --coverage --reporter=default --reporter=junit --reporter=json --outputFile.junit=tests/reports/junit-backend.xml --outputFile.json=tests/reports/resultados-backend.json",
+    "lint": "eslint src tests",
+    "test:cobertura": "vitest run --coverage"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^10.14.0",
     "globals": "^17.14.0",
     "supertest": "^7.3.1",

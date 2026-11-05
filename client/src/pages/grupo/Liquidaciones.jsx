@@ -37,7 +37,12 @@ export default function Liquidaciones() {
   const deudas = saldos.datos?.deudas ?? [];
   const pendiente = deudas.find((d) => d.deudorId === datos.emisorId && d.acreedorId === datos.receptorId)?.importe ?? 0;
   const nombre = (id) => participantes.find((p) => p.id === id)?.nombre ?? '';
-  const cambiar = (campo) => (e) => setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  // Al editar un campo se borra su error anterior.
+  const limpiarError = (campo) => setErrores(({ [campo]: _omitido, ...resto }) => resto);
+  const cambiar = (campo) => (e) => {
+    limpiarError(campo);
+    setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  };
 
   async function registrar(e) {
     e.preventDefault();
@@ -129,7 +134,10 @@ export default function Liquidaciones() {
             <CampoDinero
               etiqueta="Importe"
               valor={datos.importe}
-              alCambiar={(importe) => setDatos((d) => ({ ...d, importe }))}
+              alCambiar={(importe) => {
+                limpiarError('importe');
+                setDatos((d) => ({ ...d, importe }));
+              }}
               error={errores.importe}
               placeholder="0"
             />

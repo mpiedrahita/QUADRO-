@@ -96,8 +96,16 @@ export default function FormularioGasto() {
   if (errorCarga) return <ErrorCarga error={errorCarga} />;
   if (!datos) return <Cargando texto="Preparando el formulario…" />;
 
-  const cambiar = (campo) => (e) => setDatos((d) => ({ ...d, [campo]: e.target.value }));
-  const cambiarSeleccion = (id, cambios) => setSeleccion((s) => ({ ...s, [id]: { ...s[id], ...cambios } }));
+  // Al editar un campo se borra su error anterior.
+  const limpiarError = (campo) => setErrores(({ [campo]: _omitido, ...resto }) => resto);
+  const cambiar = (campo) => (e) => {
+    limpiarError(campo);
+    setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  };
+  const cambiarSeleccion = (id, cambios) => {
+    limpiarError('repartos');
+    setSeleccion((s) => ({ ...s, [id]: { ...s[id], ...cambios } }));
+  };
   const todos = incluidos.length === participantes.length;
 
   const sumaPct = incluidos.reduce((a, p) => a + (Number(seleccion[p.id].porcentaje) || 0), 0);
@@ -165,7 +173,10 @@ export default function FormularioGasto() {
           <CampoDinero
             etiqueta="Importe"
             valor={datos.importe}
-            alCambiar={(importe) => setDatos((d) => ({ ...d, importe }))}
+            alCambiar={(importe) => {
+              limpiarError('importe');
+              setDatos((d) => ({ ...d, importe }));
+            }}
             error={errores.importe}
             placeholder="0"
           />

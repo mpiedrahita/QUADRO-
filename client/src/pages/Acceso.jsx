@@ -19,7 +19,10 @@ export default function Acceso({ modo }) {
 
   if (usuario) return <Navigate to={ubicacion.state?.desde ?? '/grupos'} replace />;
 
-  const cambiar = (campo) => (e) => setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  const cambiar = (campo) => (e) => {
+    setErrores(({ [campo]: _omitido, ...resto }) => resto);
+    setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  };
 
   async function enviar(e) {
     e.preventDefault();

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="83" failures="0" errors="0" time="6.191412767">
+    <testsuite name="tests/integration/01-acceso.test.js" timestamp="2026-11-05T14:22:38.582Z" hostname="vm" tests="7" failures="0" errors="0" skipped="0" time="0.191339984">
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01a · registro con datos válidos crea la cuenta y abre sesión" time="0.085028614">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01b · registro con campos inválidos responde 400 con el error de cada campo" time="0.004835049">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01c · no se permite registrar dos cuentas con el mismo correo (sin importar mayúsculas)" time="0.013736196">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01d · inicio de sesión con credenciales válidas concede acceso" time="0.02498551">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01e · credenciales incorrectas muestran un error genérico y no conceden acceso" time="0.025751319">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01f · RNF-01: sin sesión se niega el acceso a las funciones privadas" time="0.01245995">
+        </testcase>
+        <testcase classname="tests/integration/01-acceso.test.js" name="PI-01 · Acceso al sistema (HU-01) &gt; PI-01g · cerrar sesión elimina la cookie y vuelve a exigir autenticación" time="0.021589834">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/02-grupos-participantes.test.js" timestamp="2026-11-05T14:22:38.585Z" hostname="vm" tests="9" failures="0" errors="0" skipped="0" time="0.760708364">
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-02 · Crear grupo (HU-02) &gt; PI-02a · se guardan el grupo y la participación del creador como administrador" time="0.109569643">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-02 · Crear grupo (HU-02) &gt; PI-02b · faltan datos obligatorios: se indica el campo y no se crea el grupo" time="0.021254752">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-02 · Crear grupo (HU-02) &gt; PI-02c · el listado muestra solo los grupos propios con su resumen" time="0.108770776">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-02 · Crear grupo (HU-02) &gt; PI-02d · solo el administrador puede editar los datos del grupo" time="0.067141351">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-03 · Gestionar participantes (HU-03) &gt; PI-03a · el administrador agrega un participante válido y queda asociado al grupo" time="0.112989856">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-03 · Gestionar participantes (HU-03) &gt; PI-03b · un integrante sin permisos no puede modificar participantes" time="0.091335896">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-03 · Gestionar participantes (HU-03) &gt; PI-03c · correo no registrado o participante repetido se rechazan con un mensaje claro" time="0.076731758">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-03 · Gestionar participantes (HU-03) &gt; PI-03d · no se retira a quien tiene cuentas pendientes; sin deudas sí, y pierde el acceso" time="0.094291927">
+        </testcase>
+        <testcase classname="tests/integration/02-grupos-participantes.test.js" name="PI-03 · Gestionar participantes (HU-03) &gt; PI-03e · el administrador no puede ser retirado y un retirado puede volver a agregarse" time="0.074071779">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/03-gastos.test.js" timestamp="2026-11-05T14:22:38.588Z" hostname="vm" tests="10" failures="0" errors="0" skipped="0" time="1.114411626">
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-04 · Registrar gasto con reparto (HU-04, HU-05) &gt; PI-04a · gasto válido queda REGISTRADO y sus repartos suman el importe" time="0.188889265">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-04 · Registrar gasto con reparto (HU-04, HU-05) &gt; PI-04b · reparto por porcentajes y por valores específicos" time="0.082993006">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-04 · Registrar gasto con reparto (HU-04, HU-05) &gt; PI-04c · si el reparto es inválido no se guarda nada (transacción)" time="0.07323977">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-04 · Registrar gasto con reparto (HU-04, HU-05) &gt; PI-04d · valor en cero, datos faltantes o fecha futura muestran validación y no se registran" time="0.079475328">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-04 · Registrar gasto con reparto (HU-04, HU-05) &gt; PI-04e · pagador, participantes o categoría de otro grupo se rechazan" time="0.144313614">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-06 · Editar o anular gasto (HU-09) &gt; PI-06a · editar el importe deja el gasto MODIFICADO y recalcula los saldos" time="0.097026534">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-06 · Editar o anular gasto (HU-09) &gt; PI-06b · RNF-02: un integrante que no registró el gasto no puede modificarlo ni anularlo" time="0.09410913">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-06 · Editar o anular gasto (HU-09) &gt; PI-06c · el administrador puede anular; el gasto anulado sale de los saldos y no se puede editar" time="0.135366982">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-07 · Historial con filtros (HU-07) &gt; PI-07a · filtrar por fecha, categoría y participante muestra solo los coincidentes" time="0.148629624">
+        </testcase>
+        <testcase classname="tests/integration/03-gastos.test.js" name="PI-07 · Historial con filtros (HU-07) &gt; PI-07b · un rango de fechas invertido o un filtro mal formado se rechaza" time="0.065276846">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/04-saldos-liquidaciones.test.js" timestamp="2026-11-05T14:22:38.591Z" hostname="vm" tests="8" failures="0" errors="0" skipped="0" time="0.870800805">
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-05 · Consultar saldos (HU-06) &gt; PI-05a · el integrante ve aportes, obligaciones, saldos, deudas y resumen" time="0.193191663">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-05 · Consultar saldos (HU-06) &gt; PI-05b · RNF-04: un usuario de otro grupo no ve nada" time="0.113944989">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-05 · Consultar saldos (HU-06) &gt; PI-05c · sin movimientos se muestran valores iniciales en cero" time="0.074856673">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-08 · Registrar liquidación (HU-13) &gt; PI-08a · una liquidación válida queda guardada y actualiza los saldos" time="0.115104494">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-08 · Registrar liquidación (HU-13) &gt; PI-08b · un pago parcial deja el resto de la deuda pendiente" time="0.082083115">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-08 · Registrar liquidación (HU-13) &gt; PI-08c · un importe que supera la deuda o una deuda inexistente se rechazan" time="0.091636857">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-08 · Registrar liquidación (HU-13) &gt; PI-08d · un integrante no involucrado no puede registrar la liquidación de otros; el administrador sí" time="0.092712069">
+        </testcase>
+        <testcase classname="tests/integration/04-saldos-liquidaciones.test.js" name="PI-08 · Registrar liquidación (HU-13) &gt; PI-08e · anular una liquidación devuelve la deuda a su estado anterior" time="0.103435678">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/05-categorias-comprobantes.test.js" timestamp="2026-11-05T14:22:38.593Z" hostname="vm" tests="7" failures="0" errors="0" skipped="0" time="0.81365163">
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-09 · Administrar categorías (HU-10) &gt; PI-09a · el administrador crea una categoría válida y queda disponible para clasificar gastos" time="0.210997847">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-09 · Administrar categorías (HU-10) &gt; PI-09b · nombre inválido o repetido solicita corregirlo; un integrante no puede crearlas" time="0.082412302">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-09 · Administrar categorías (HU-10) &gt; PI-09c · se puede renombrar; solo se elimina si no tiene gastos" time="0.092951155">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-10 · Adjuntar comprobante (HU-08) &gt; PI-10a · un archivo permitido queda asociado al gasto y puede consultarse" time="0.124372656">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-10 · Adjuntar comprobante (HU-08) &gt; PI-10b · formatos no admitidos y archivos que superan 2 MB se rechazan" time="0.120195659">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-10 · Adjuntar comprobante (HU-08) &gt; PI-10c · solo quien lo subió, quien registró el gasto o el administrador pueden eliminarlo" time="0.099517302">
+        </testcase>
+        <testcase classname="tests/integration/05-categorias-comprobantes.test.js" name="PI-10 · Adjuntar comprobante (HU-08) &gt; PI-10d · no se adjuntan comprobantes a un gasto anulado" time="0.079113832">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/06-seguridad-rendimiento.test.js" timestamp="2026-11-05T14:22:38.595Z" hostname="vm" tests="4" failures="0" errors="0" skipped="0" time="2.277827174">
+        <testcase classname="tests/integration/06-seguridad-rendimiento.test.js" name="PI-11 · Manejo de errores y seguridad básica &gt; PI-11a · JSON mal formado, rutas inexistentes e identificadores inválidos responden con mensajes claros" time="0.161191909">
+        </testcase>
+        <testcase classname="tests/integration/06-seguridad-rendimiento.test.js" name="PI-11 · Manejo de errores y seguridad básica &gt; PI-11b · las respuestas incluyen cabeceras de seguridad y no exponen la tecnología" time="0.004265678">
+        </testcase>
+        <testcase classname="tests/integration/06-seguridad-rendimiento.test.js" name="PI-11 · Manejo de errores y seguridad básica &gt; PI-11c · un texto con intento de inyección SQL se guarda como texto literal" time="0.094878303">
+        </testcase>
+        <testcase classname="tests/integration/06-seguridad-rendimiento.test.js" name="RNF-06 · Rendimiento de las operaciones principales &gt; RNF-06 · con 150 gastos y 3 integrantes, historial y saldos responden en menos de 500 ms" time="2.013799075">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/07-limite-intentos.test.js" timestamp="2026-11-05T14:22:38.596Z" hostname="vm" tests="1" failures="0" errors="0" skipped="0" time="0.098517129">
+        <testcase classname="tests/integration/07-limite-intentos.test.js" name="PI-12 · Límite de intentos de inicio de sesión &gt; PI-12 · tras 3 intentos fallidos se bloquean nuevos intentos temporalmente" time="0.096297813">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/reparto.test.js" timestamp="2026-11-05T14:22:38.597Z" hostname="vm" tests="17" failures="0" errors="0" skipped="0" time="0.032001842">
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto en partes iguales &gt; PU-01 · $90.000 entre 3 → tres repartos de $30.000" time="0.004233153">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto en partes iguales &gt; PU-02 · $100.000 entre 3 → 33.334, 33.333 y 33.333 (suman $100.000)" time="0.000608233">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto en partes iguales &gt; PU-09 · $100.001 entre 3 → los dos pesos sobrantes van a los dos primeros" time="0.000333491">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto en partes iguales &gt; PU-10 · un solo participante asume todo el gasto" time="0.00018105">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por porcentajes &gt; PU-03 · $200.000 con 50 %, 30 % y 20 % → $100.000, $60.000 y $40.000" time="0.000511634">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por porcentajes &gt; PU-04 · porcentajes que suman 90 % → se rechaza el reparto" time="0.001472763">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por porcentajes &gt; PU-11 · porcentajes con decimales: el redondeo conserva el total (mayor residuo)" time="0.000261241">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por porcentajes &gt; PU-12 · importe no divisible por porcentaje: la suma sigue siendo exacta" time="0.000346474">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por porcentajes &gt; PU-13 · porcentaje cero, negativo o con más de dos decimales → se rechaza" time="0.000688668">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por valores específicos &gt; PU-14 · valores que suman el importe se aceptan tal cual" time="0.000501793">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por valores específicos &gt; PU-15 · valores que no suman el importe → se rechaza con el detalle" time="0.000647021">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Reparto por valores específicos &gt; PU-16 · valores con decimales o en cero → se rechaza" time="0.000443042">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Validaciones generales del reparto &gt; PU-05 · importe en $0 o negativo → se rechaza el gasto" time="0.000328819">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Validaciones generales del reparto &gt; PU-17 · importe con centavos → se rechaza (se manejan pesos enteros)" time="0.000231816">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Validaciones generales del reparto &gt; PU-18 · sin participantes o con participantes repetidos → se rechaza" time="0.000387941">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Validaciones generales del reparto &gt; PU-19 · método desconocido → se rechaza" time="0.000205688">
+        </testcase>
+        <testcase classname="tests/unit/reparto.test.js" name="Validaciones generales del reparto &gt; PU-20 · propiedad: para importes aleatorios la suma del reparto igual siempre es el total" time="0.017973156">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/saldos.test.js" timestamp="2026-11-05T14:22:38.602Z" hostname="vm" tests="9" failures="0" errors="0" skipped="0" time="0.013914259">
+        <testcase classname="tests/unit/saldos.test.js" name="Saldos individuales &gt; PU-06 · Ana paga $90.000 repartidos entre 3 → Ana +$60.000, Bruno −$30.000, Carla −$30.000" time="0.006171788">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Saldos individuales &gt; PU-07 · grupo sin gastos → todos los saldos en $0" time="0.000892915">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Saldos individuales &gt; PU-21 · los gastos anulados no afectan los saldos" time="0.000342115">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Saldos individuales &gt; PU-22 · una liquidación de Bruno a Ana reduce ambas posiciones" time="0.000404896">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Saldos individuales &gt; PU-23 · invariante: la suma de los saldos del grupo siempre es 0" time="0.000334152">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Deudas entre integrantes &gt; PU-24 · cada participante le debe su parte a quien pagó" time="0.000880183">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Deudas entre integrantes &gt; PU-25 · deudas cruzadas entre dos personas se compensan" time="0.000374161">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Deudas entre integrantes &gt; PU-26 · una liquidación total cancela la deuda y las anuladas no cuentan" time="0.00036468">
+        </testcase>
+        <testcase classname="tests/unit/saldos.test.js" name="Deudas entre integrantes &gt; PU-27 · las deudas son coherentes con los saldos netos" time="0.000608444">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validaciones.test.js" timestamp="2026-11-05T14:22:38.604Z" hostname="vm" tests="11" failures="0" errors="0" skipped="0" time="0.018239954">
+        <testcase classname="tests/unit/validaciones.test.js" name="Grupo &gt; PU-08 · crear un grupo sin nombre → se rechaza el grupo" time="0.005158182">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Grupo &gt; PU-28 · el nombre se recorta y la descripción vacía queda en null" time="0.001161301">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Registro e inicio de sesión &gt; PU-29 · registro con datos inválidos informa cada campo" time="0.001444975">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Registro e inicio de sesión &gt; PU-30 · el correo se normaliza a minúsculas y sin espacios" time="0.000943161">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Gasto &gt; PU-31 · un gasto completo es válido" time="0.00256918">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Gasto &gt; PU-32 · gasto sin descripción, sin categoría y con fecha imposible → errores por campo" time="0.000891152">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Gasto &gt; PU-33 · importe en texto con centavos → se rechaza" time="0.000566214">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Archivos de comprobantes (RNF-09) &gt; PU-34 · se reconoce el tipo real por la firma del archivo" time="0.00056933">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Archivos de comprobantes (RNF-09) &gt; PU-35 · un archivo de texto renombrado como imagen no se acepta" time="0.000331764">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Archivos de comprobantes (RNF-09) &gt; PU-36 · el nombre del archivo se limpia de rutas y caracteres peligrosos" time="0.001637621">
+        </testcase>
+        <testcase classname="tests/unit/validaciones.test.js" name="Fechas &gt; PU-37 · solo se aceptan fechas reales AAAA-MM-DD" time="0.000378427">
+        </testcase>
+    </testsuite>
+</testsuites>

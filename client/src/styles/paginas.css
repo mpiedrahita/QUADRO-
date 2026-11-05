@@ -1,0 +1,214 @@
+/* Quadro · Estilos específicos de cada pantalla */
+
+/* ---------- Mis grupos ---------- */
+.lista-grupos { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-3); }
+.fila-grupo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10rem 10rem;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-4) var(--e-5);
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-left: 4px solid var(--verde-profundo);
+  border-radius: var(--r-contenedor);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.fila-grupo:hover { border-color: var(--verde-medio); color: inherit; }
+.fila-grupo__nombre { display: grid; gap: 2px; min-width: 0; }
+.fila-grupo__nombre strong { font-size: var(--t-l); color: var(--verde-profundo); }
+.fila-grupo__nombre > span { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); color: var(--grafito-suave); font-size: var(--t-s); }
+.fila-grupo__dato { display: grid; text-align: right; font-size: var(--t-s); color: var(--grafito-suave); }
+.fila-grupo__dato strong { font-size: var(--t-l); color: var(--grafito); }
+.fila-grupo__dato strong.saldo-positivo { color: var(--verde-medio); }
+.fila-grupo__dato strong.saldo-negativo { color: var(--ambar-texto); }
+
+/* ---------- Saldos ---------- */
+.saldos {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 2fr);
+  grid-template-areas:
+    'posicion balanza'
+    'deudas resumen'
+    'tabla tabla';
+  gap: var(--e-5);
+  align-items: start;
+}
+.posicion { grid-area: posicion; }
+.saldos__balanza { grid-area: balanza; }
+.saldos > section:nth-of-type(3) { grid-area: deudas; }
+.saldos > section:nth-of-type(4) { grid-area: resumen; }
+.saldos__tabla { grid-area: tabla; }
+
+.posicion {
+  padding: var(--e-5);
+  border-radius: var(--r-contenedor);
+  background: var(--verde-suave);
+}
+.posicion__titulo { font-size: var(--t-m); font-weight: 600; color: var(--verde-profundo); }
+.posicion__cifra { margin-top: var(--e-1); font-size: var(--t-4xl); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--verde-profundo); }
+.posicion__cifra.saldo-negativo { color: var(--ambar-texto); }
+.posicion__detalle { display: grid; gap: var(--e-2); margin: var(--e-4) 0 0; padding-top: var(--e-3); border-top: 1px solid rgba(24, 59, 53, 0.15); }
+.posicion__detalle div { display: flex; justify-content: space-between; gap: var(--e-3); font-size: var(--t-s); }
+.posicion__detalle dt { color: var(--verde-profundo); }
+.posicion__detalle dd { margin: 0; font-weight: 600; }
+
+/* La balanza: eje central, deudas hacia la izquierda y saldos a favor hacia la derecha */
+.balanza { display: grid; gap: var(--e-2); }
+.balanza__ejes,
+.balanza__fila {
+  display: grid;
+  grid-template-columns: minmax(6rem, 9rem) 1fr 1fr 7.5rem;
+  align-items: center;
+  column-gap: 0;
+}
+.balanza__ejes { font-size: var(--t-xs); font-weight: 600; color: var(--grafito-suave); }
+.balanza__eje-debe { text-align: right; padding-right: var(--e-3); color: var(--ambar-texto); }
+.balanza__eje-favor { padding-left: var(--e-3); color: var(--verde-medio); }
+.balanza__fila { min-height: 40px; }
+.balanza__nombre { font-weight: 600; padding-right: var(--e-3); line-height: 1.25; overflow-wrap: anywhere; }
+.balanza__usted { font-weight: 400; color: var(--grafito-suave); }
+.balanza__lado { display: flex; align-items: center; height: 40px; }
+.balanza__lado--debe { justify-content: flex-end; }
+.balanza__lado--favor { border-left: 2px solid var(--verde-profundo); }
+.balanza__barra { height: 20px; min-width: 3px; animation: crecer 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.balanza__barra--debe { background: var(--ambar); border-radius: 5px 0 0 5px; transform-origin: right center; }
+.balanza__barra--favor { background: var(--verde-profundo); border-radius: 0 5px 5px 0; transform-origin: left center; }
+.balanza__valor { text-align: right; font-weight: 700; }
+@keyframes crecer { from { transform: scaleX(0); } }
+
+.cuadradas { display: flex; align-items: center; gap: var(--e-3); margin-bottom: var(--e-4); padding: var(--e-3) var(--e-4); border-radius: var(--r-control); background: var(--verde-suave); }
+.cuadradas__marca { width: 36px; height: 36px; flex: none; }
+.cuadradas strong { color: var(--verde-profundo); }
+.cuadradas p { font-size: var(--t-s); color: var(--verde-profundo); }
+
+.deuda { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--e-2) var(--e-3); padding: var(--e-3) 0; }
+.deuda__valor { font-weight: 700; color: var(--ambar-texto); }
+.deuda .boton { grid-column: 1 / -1; justify-self: start; }
+
+.resumen-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-3); margin: 0; }
+.resumen-cifras div { padding: var(--e-3); border-radius: var(--r-control); background: var(--marfil); }
+.resumen-cifras dt { font-size: var(--t-xs); color: var(--grafito-suave); }
+.resumen-cifras dd { margin: 2px 0 0; font-size: var(--t-xl); font-weight: 700; color: var(--verde-profundo); }
+
+.categorias-barras { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-2); }
+.categorias-barras li { display: grid; grid-template-columns: 8.5rem 1fr 6.5rem; align-items: center; gap: var(--e-3); font-size: var(--t-s); }
+.categorias-barras .cifra { text-align: right; font-weight: 600; }
+.categorias-barras__nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.categorias-barras__pista { height: 10px; border-radius: 5px; background: var(--marfil); overflow: hidden; }
+.categorias-barras__pista span { display: block; height: 100%; border-radius: 5px; background: var(--verde-medio); }
+
+/* ---------- Gastos ---------- */
+.filtros { padding: var(--e-4) var(--e-5); }
+.filtros__campos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--e-3); }
+.filtros__pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--e-3); margin-top: var(--e-3); min-height: 36px; }
+.panel--lista { padding-bottom: var(--e-3); }
+
+.gastos { margin: 0 calc(-1 * var(--e-5)); }
+.gasto__boton {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--e-4);
+  width: 100%;
+  padding: var(--e-3) var(--e-5);
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.gasto__boton:hover { background: var(--marfil); }
+.gasto__fecha { font-size: var(--t-s); color: var(--grafito-suave); }
+.gasto__principal { display: grid; gap: 2px; min-width: 0; }
+.gasto__principal strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gasto__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); font-size: var(--t-s); color: var(--grafito-suave); }
+.gasto__clip { display: inline-flex; color: var(--verde-medio); }
+.gasto__importes { display: grid; justify-items: end; gap: 2px; }
+.gasto__importes strong { font-size: var(--t-l); }
+.gasto__importes span { font-size: var(--t-xs); color: var(--grafito-suave); }
+.gasto--anulado .gasto__principal strong,
+.gasto--anulado .gasto__importes strong { text-decoration: line-through; color: var(--grafito-suave); }
+
+.detalle { display: grid; gap: var(--e-4); }
+.detalle__cabecera { display: flex; align-items: center; gap: var(--e-3); }
+.detalle__importe { font-size: var(--t-3xl); font-weight: 800; letter-spacing: -0.02em; color: var(--verde-profundo); }
+.detalle__datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-3); margin: 0; }
+.detalle__datos dt { font-size: var(--t-xs); color: var(--grafito-suave); }
+.detalle__datos dd { margin: 0; font-weight: 600; }
+.detalle__seccion { display: grid; gap: var(--e-2); padding-top: var(--e-4); border-top: 1px solid var(--linea); }
+.detalle__seccion h3 { font-size: var(--t-m); }
+.detalle__nota { padding-top: var(--e-3); }
+.comprobantes li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); padding: var(--e-2) 0; }
+.comprobantes a { font-weight: 600; word-break: break-all; }
+.comprobantes__subir { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-3); }
+
+/* ---------- Formulario de gasto ---------- */
+.formulario-gasto { display: grid; gap: var(--e-5); max-width: 760px; }
+.formulario-gasto__encabezado { display: grid; gap: var(--e-1); }
+.formulario-gasto h3 { font-size: var(--t-l); }
+.formulario-gasto__acciones { display: flex; justify-content: flex-end; gap: var(--e-3); }
+.reparto { display: grid; gap: var(--e-3); }
+.reparto__cabecera { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--e-2); }
+.reparto__lista { border: 1px solid var(--linea); border-radius: var(--r-control); background: var(--papel); }
+.reparto__fila { display: grid; grid-template-columns: minmax(0, 1fr) auto 8rem; align-items: center; gap: var(--e-3); padding: var(--e-2) var(--e-3); min-height: 56px; }
+.reparto__fila--fuera .reparto__persona { color: var(--grafito-suave); }
+.reparto__persona { font-size: var(--t-m); font-weight: 500; }
+.reparto__entrada { display: inline-flex; align-items: center; gap: 6px; color: var(--grafito-suave); }
+.reparto__entrada .campo__control { width: 6.5rem; min-height: 40px; text-align: right; }
+.reparto__entrada--dinero .campo__control { width: 8.5rem; }
+.reparto__monto { text-align: right; font-weight: 600; }
+.reparto__fila--fuera .reparto__monto { font-weight: 400; color: var(--grafito-suave); font-size: var(--t-s); }
+.reparto__resumen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--e-2);
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--r-control);
+  background: var(--verde-suave);
+  color: var(--verde-profundo);
+  font-size: var(--t-s);
+}
+.reparto__resumen--error { background: var(--ambar-claro); color: #5c3a0c; }
+
+/* ---------- Liquidaciones, integrantes y categorías ---------- */
+.liquidacion,
+.integrante,
+.categoria { display: flex; align-items: center; gap: var(--e-3); padding: var(--e-3) 0; }
+.liquidacion__texto,
+.integrante__datos,
+.categoria__nombre { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.liquidacion__texto .etiqueta { justify-self: start; }
+.liquidacion__valor { font-weight: 700; color: var(--verde-profundo); }
+.liquidacion--anulada .liquidacion__valor,
+.liquidacion--anulada strong { text-decoration: line-through; color: var(--grafito-suave); }
+.integrante__datos span { font-size: var(--t-s); overflow: hidden; text-overflow: ellipsis; }
+.integrante--retirado { opacity: 0.65; }
+.categoria__acciones { display: flex; gap: var(--e-1); }
+
+/* ---------- Adaptación ---------- */
+@media (max-width: 1080px) {
+  .saldos { grid-template-columns: 1fr; grid-template-areas: 'posicion' 'balanza' 'deudas' 'resumen' 'tabla'; }
+  .filtros__campos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .fila-grupo { grid-template-columns: 1fr 1fr; padding: var(--e-4); }
+  .fila-grupo__nombre { grid-column: 1 / -1; }
+  .fila-grupo__dato { text-align: left; }
+  .balanza__ejes,
+  .balanza__fila { grid-template-columns: 5.5rem 1fr 1fr 6.5rem; font-size: var(--t-s); }
+  .resumen-cifras { grid-template-columns: 1fr; }
+  .categorias-barras li { grid-template-columns: 6rem 1fr 5.5rem; }
+  .gastos { margin: 0 calc(-1 * var(--e-4)); }
+  .gasto__boton { grid-template-columns: minmax(0, 1fr) auto; padding: var(--e-3) var(--e-4); gap: var(--e-1) var(--e-3); }
+  .gasto__fecha { grid-column: 1 / -1; font-size: var(--t-xs); }
+  .detalle__datos { grid-template-columns: 1fr 1fr; }
+  .reparto__fila { grid-template-columns: minmax(0, 1fr) auto; }
+  .reparto__monto { grid-column: 1 / -1; text-align: left; font-size: var(--t-s); padding-left: 26px; }
+  .formulario-gasto__acciones .boton { flex: 1; }
+  .filtros { padding: var(--e-4); }
+  .filtros__campos { grid-template-columns: 1fr 1fr; }
+}

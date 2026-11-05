@@ -16,5 +16,12 @@ export default defineConfig({
     testTimeout: 20000,
     hookTimeout: 30000,
     include: ['tests/**/*.test.js'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.js'],
+      exclude: ['src/server.js', 'src/db/seed-demo.js'],
+      reporter: ['text-summary', 'html', 'json-summary'],
+      reportsDirectory: 'tests/reports/cobertura',
+    },
   },
 });

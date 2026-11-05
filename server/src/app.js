@@ -30,7 +30,9 @@ export function crearApp() {
           objectSrc: ["'none'"],
           frameSrc: ["'self'", 'blob:'],
           frameAncestors: ["'self'"],
-          upgradeInsecureRequests: esProduccion ? [] : null,
+          // Sin upgrade-insecure-requests: rompería la carga en http://localhost (Docker Compose).
+          // En Render el proveedor ya fuerza HTTPS.
+          upgradeInsecureRequests: null,
         },
       },
     })

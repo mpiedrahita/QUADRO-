@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+e2e/output/
+e2e/.tmp/
+server/tests/reports/*.tmp

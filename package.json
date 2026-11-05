@@ -1,0 +1,27 @@
+{
+  "name": "quadro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quadro: gestión de gastos compartidos para pequeños emprendimientos",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace client",
+    "dev:server": "npm run dev --workspace server",
+    "dev:client": "npm run dev --workspace client",
+    "build": "npm run build --workspace client",
+    "start": "npm run start --workspace server",
+    "db:migrate": "npm run db:migrate --workspace server",
+    "db:seed": "npm run db:seed --workspace server",
+    "test": "npm run test --workspace server",
+    "test:unit": "npm run test:unit --workspace server",
+    "test:integration": "npm run test:integration --workspace server",
+    "test:e2e": "node e2e/run-e2e.mjs",
+    "lint": "npm run lint --workspace server && npm run lint --workspace client"
+  }
+}

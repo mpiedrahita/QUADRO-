@@ -1,0 +1,36 @@
+{
+  "name": "@quadro/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=../.env src/server.js",
+    "start": "node --env-file-if-exists=../.env src/server.js",
+    "db:migrate": "node --env-file-if-exists=../.env src/db/migrate.js",
+    "db:seed": "node --env-file-if-exists=../.env src/db/seed-demo.js",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:report": "vitest run --reporter=default --reporter=junit --reporter=json --outputFile.junit=tests/reports/junit.xml --outputFile.json=tests/reports/resultados.json",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "supertest": "^7.3.1",
+    "vitest": "^5.1.0"
+  }
+}

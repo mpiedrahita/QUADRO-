@@ -87,7 +87,7 @@ test('E2E-04 · HU-04, HU-05: registrar un gasto en partes iguales con vista pre
   await expect(page.locator('.reparto__monto')).toHaveText(['$30.000', '$30.000', '$30.000']);
   await captura(page, '06-registrar-gasto', { fullPage: true });
   await page.getByRole('button', { name: 'Registrar gasto' }).click();
-  await expect(page.getByText('Gasto registrado')).toBeVisible();
+  await expect(page.getByText('Gasto registrado').last()).toBeVisible();
   await expect(page).toHaveURL(/\/gastos$/);
   await expect(page.getByText('Harina de maíz y queso')).toBeVisible();
 });
@@ -112,7 +112,7 @@ test('E2E-05 · HU-05, RNF-03: porcentajes que no suman 100 % se rechazan; corre
   await expect(page.locator('.reparto__monto')).toHaveText(['$100.000', '$60.000', '$40.000']);
   await captura(page, '08-reparto-porcentajes', { fullPage: true });
   await page.getByRole('button', { name: 'Registrar gasto' }).click();
-  await expect(page.getByText('Gasto registrado')).toBeVisible();
+  await expect(page.getByText('Gasto registrado').last()).toBeVisible();
   await expect(page.locator('.gasto')).toHaveCount(2);
   await captura(page, '09-historial-gastos');
 });
@@ -167,7 +167,7 @@ test('E2E-10 · HU-09: anular un gasto pide confirmación y lo excluye de los sa
   await page.getByLabel('Descripción').fill('Gasto duplicado por error');
   await page.getByLabel('Importe').fill('15000');
   await page.getByRole('button', { name: 'Registrar gasto' }).click();
-  await expect(page.getByText('Gasto registrado')).toBeVisible();
+  await expect(page.getByText('Gasto registrado').last()).toBeVisible();
 
   await page.getByText('Gasto duplicado por error').click();
   await page.getByRole('dialog').getByRole('button', { name: 'Anular gasto' }).click();

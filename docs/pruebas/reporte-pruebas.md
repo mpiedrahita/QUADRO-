@@ -10,7 +10,7 @@ El objetivo es verificar que el MVP cumple los requisitos y criterios de aceptac
 
 | Elemento | Valor |
 |---|---|
-| Fecha de la ejecución final | 5 de noviembre de 2026 |
+| Ejecución final | 5 de noviembre de 2026, 09:22 (hora de Bogotá), rama `release/v1.0.0`, commit `fec79e8`, sobre un clon limpio del repositorio (`npm ci` desde cero) |
 | Sistema | Linux (Ubuntu 24.04), Node.js 22.23.4, npm 10.9.9 |
 | Base de datos | PostgreSQL 16.15 local, bases independientes `quadro_test` y `quadro_e2e`, que se borran al iniciar cada ejecución |
 | Navegador E2E | Chrome for Testing 153 (escritorio 1366 × 860 y celular emulado Pixel 7 de 390 × 844) |
@@ -32,10 +32,10 @@ Los ID PU-01 a PU-08 y PI-01 a PI-07 son los del plan del Entregable 2; los sigu
 
 | Nivel | Pruebas | Pasaron | Fallaron | Duración |
 |---|---|---|---|---|
-| Unitarias | 37 | 37 | 0 | < 0,1 s |
-| Integración | 46 | 46 | 0 | ≈ 6 s |
-| E2E escritorio | 15 | 15 | 0 | ≈ 48 s (todo E2E) |
-| E2E celular | 1 | 1 | 0 | ≈ 8 s |
+| Unitarias | 37 | 37 | 0 | 12,9 s en total para unitarias e integración, con medición de cobertura |
+| Integración | 46 | 46 | 0 | (incluido arriba) |
+| E2E escritorio | 15 | 15 | 0 | 31,5 s en total para las 16 E2E, incluida la compilación previa |
+| E2E celular | 1 | 1 | 0 | (incluido arriba) |
 | **Total** | **99** | **99** | **0** | |
 | ESLint (backend y frontend) | — | Sin errores ni advertencias | — | — |
 
@@ -45,7 +45,7 @@ Los ID PU-01 a PU-08 y PI-01 a PI-07 son los del plan del Entregable 2; los sigu
 |---|---|---|---|
 | Líneas | 93,3 % | 98,1 % | 100 % |
 | Sentencias | 90,2 % | 98,5 % | 97,9 % |
-| Ramas | 80,1 % | 97,4 % | 92,0 % |
+| Ramas | 80,2 % | 97,4 % | 92,0 % |
 | Funciones | 95,5 % | 100 % | 100 % |
 
 Se excluyen de la medición `server.js` (arranque) y `seed-demo.js` (datos de demostración). El detalle por archivo está en `evidencias/cobertura/index.html`.
@@ -193,13 +193,13 @@ El Entregable 1 dejó pendientes los valores de RNF-06, RNF-07 y RNF-09 hasta el
 
 | RNF | Umbral | Medición | Resultado |
 |---|---|---|---|
-| RNF-06 | Historial y saldos de un grupo con 150 gastos y 3 integrantes en menos de 500 ms (peor de 5 mediciones, PostgreSQL local) | Peor tiempo: saldos 8,0 ms, historial 11,9 ms (`evidencias/rnf06-rendimiento.json`) | Cumple |
+| RNF-06 | Historial y saldos de un grupo con 150 gastos y 3 integrantes en menos de 500 ms (peor de 5 mediciones, PostgreSQL local) | Peor tiempo en la ejecución final: saldos 20,1 ms, historial 18,2 ms (`evidencias/rnf06-rendimiento.json`) | Cumple |
 | RNF-07 | Chrome actual, en escritorio (1366 px) y celular (390 px), sin desplazamiento horizontal | 15 E2E en escritorio y E2E-16 en celular | Cumple en Chrome |
 | RNF-09 | JPG, PNG, WEBP o PDF; máximo 2 MB; máximo 5 por gasto | PU-34, PU-35, PI-10b | Cumple |
 
 ## 9. Defectos encontrados y corregidos
 
-Todos los defectos se encontraron durante el desarrollo de esta entrega y se corrigieron antes de la ejecución final. Después de cada corrección se volvió a ejecutar la suite completa.
+Todos los defectos se encontraron durante el desarrollo o la verificación final de esta entrega y se corrigieron antes de la ejecución final. Después de cada corrección se volvió a ejecutar la suite completa.
 
 | ID | Detectado por | Descripción | Corrección | Verificación |
 |---|---|---|---|---|
@@ -213,11 +213,14 @@ Todos los defectos se encontraron durante el desarrollo de esta entrega y se cor
 | DEF-08 | ESLint | Un error relanzado perdía su causa original (`preserve-caught-error`) | `{ cause: error }` en `migrate.js` | Lint sin errores |
 | DEF-09 | Revisión visual | El mismo error de reparto aparecía tres veces en el formulario de gasto | Mensaje general corto y uno solo junto al reparto | Captura 07 |
 | DEF-10 | Revisión visual | Fechas largas ("1 de nov de 2026") partidas en dos líneas; texto "le debe a ti" | Formato "1 nov 2026" y textos "te debe" y "Le debes a" | Capturas 09 y 10 |
+| DEF-11 | Revisión de seguridad durante la verificación final | La política de contenido en producción incluía `upgrade-insecure-requests`, que podía impedir cargar la app en `http://localhost` (Docker Compose) | Se retira la directiva; en Render el proveedor ya fuerza HTTPS | Ingreso y saldos en Chrome en modo producción por `http://localhost`, sin solicitudes fallidas |
+| DEF-12 | Verificación final (Playwright no leía `.env`) | `CHROME_PATH` definido en `.env` no llegaba a la configuración de Playwright | `playwright.config.js` carga `.env` | `npm run test:e2e` en el clon limpio |
 
 Ajustes a los guiones de prueba (no eran defectos del producto):
 
 - E2E-01 esperaba "Ingresa un correo electrónico válido." con el correo vacío, pero el sistema responde correctamente "El correo es obligatorio." Se corrigió la expectativa.
 - PI-08d se rediseñó antes de su primera ejecución: el administrador del caso original también era el receptor, así que no probaba el permiso del administrador no involucrado.
+- E2E-05 falló una vez en el clon limpio porque el aviso "Gasto registrado" del paso anterior seguía en pantalla y había dos avisos iguales. La prueba dependía del tiempo; ahora espera el aviso más reciente. Después del ajuste la suite E2E se ejecutó cuatro veces seguidas con 16 de 16 aprobadas.
 
 ## 10. Lo que no se probó
 

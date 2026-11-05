@@ -1,0 +1,92 @@
+<testsuites id="" name="" tests="16" failures="0" skipped="0" errors="0" time="31.545481">
+<testsuite name="acceso.spec.js" timestamp="2026-11-05T14:22:41.475Z" hostname="escritorio" tests="2" failures="0" skipped="0" time="2.344" errors="0">
+<testcase name="E2E-14 · RNF-01: sin sesión, una página privada redirige a &quot;Ingresar&quot;" classname="acceso.spec.js" time="1.025">
+</testcase>
+<testcase name="E2E-15 · HU-01: credenciales incorrectas muestran un error y no dan acceso" classname="acceso.spec.js" time="1.319">
+</testcase>
+</testsuite>
+<testsuite name="flujo-principal.spec.js" timestamp="2026-11-05T14:22:41.475Z" hostname="escritorio" tests="13" failures="0" skipped="0" time="22.483" errors="0">
+<testcase name="E2E-01 · HU-01: el registro valida los campos y crea la cuenta" classname="flujo-principal.spec.js" time="1.068">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-02 · HU-02: crear un grupo exige nombre y deja al creador como administrador" classname="flujo-principal.spec.js" time="0.692">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-03 · HU-03: el administrador agrega integrantes por correo" classname="flujo-principal.spec.js" time="0.666">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-04 · HU-04, HU-05: registrar un gasto en partes iguales con vista previa del reparto" classname="flujo-principal.spec.js" time="4.654">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-05 · HU-05, RNF-03: porcentajes que no suman 100 % se rechazan; corregidos se guardan" classname="flujo-principal.spec.js" time="1.469">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-06 · HU-06, RF-08: los saldos muestran aportes, obligaciones y deudas" classname="flujo-principal.spec.js" time="0.276">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-07 · HU-08, RNF-09: adjuntar un comprobante a un gasto" classname="flujo-principal.spec.js" time="0.7">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-08 · HU-07, RF-12: el historial se filtra por categoría" classname="flujo-principal.spec.js" time="0.168">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-09 · HU-09, RF-10: editar un gasto lo marca como modificado y recalcula los saldos" classname="flujo-principal.spec.js" time="3.25">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-10 · HU-09: anular un gasto pide confirmación y lo excluye de los saldos" classname="flujo-principal.spec.js" time="4.722">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-11 · HU-10, RF-11: el administrador crea categorías y no se permiten repetidas" classname="flujo-principal.spec.js" time="0.497">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-12 · HU-13, RF-19: un integrante registra una liquidación y los saldos se actualizan" classname="flujo-principal.spec.js" time="2.956">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+<testcase name="E2E-13 · RNF-04: una persona que no es integrante no puede ver el grupo" classname="flujo-principal.spec.js" time="1.365">
+<properties>
+<property name="serial" value="">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="celular.spec.js" timestamp="2026-11-05T14:22:41.475Z" hostname="celular" tests="1" failures="0" skipped="0" time="2.33" errors="0">
+<testcase name="E2E-16 · RNF-07 @celular: menú, saldos y registro de gasto en pantalla de celular" classname="celular.spec.js" time="2.33">
+</testcase>
+</testsuite>
+</testsuites>

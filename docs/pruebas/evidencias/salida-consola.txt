@@ -1,0 +1,100 @@
+== Ejecución final 2026-11-05T09:22:21-05:00 · rama release/v1.0.0 · commit fec79e8
+== npm run lint
+
+> quadro@1.0.0 lint
+> npm run lint --workspace server && npm run lint --workspace client
+
+
+> @quadro/server@1.0.0 lint
+> eslint src tests
+
+
+> @quadro/client@1.0.0 lint
+> eslint src
+
+== npm run test:report --workspace server
+
+> @quadro/server@1.0.0 test:report
+> vitest run --coverage --reporter=default --reporter=junit --reporter=json --outputFile.junit=tests/reports/junit-backend.xml --outputFile.json=tests/reports/resultados-backend.json
+
+
+ RUN  v5.1.0 /tmp/verif/server
+      Coverage enabled with v8
+
+ ✓ tests/integration/06-seguridad-rendimiento.test.js (4 tests) 2278ms
+   ✓ RNF-06 · Rendimiento de las operaciones principales (1)
+     ✓ RNF-06 · con 150 gastos y 3 integrantes, historial y saldos responden en menos de 500 ms 2014ms
+ ✓ tests/integration/03-gastos.test.js (10 tests) 1114ms
+ ✓ tests/integration/04-saldos-liquidaciones.test.js (8 tests) 871ms
+ ✓ tests/integration/02-grupos-participantes.test.js (9 tests) 761ms
+ ✓ tests/integration/05-categorias-comprobantes.test.js (7 tests) 814ms
+ ✓ tests/integration/01-acceso.test.js (7 tests) 191ms
+ ✓ tests/integration/07-limite-intentos.test.js (1 test) 99ms
+ ✓ tests/unit/reparto.test.js (17 tests) 32ms
+ ✓ tests/unit/validaciones.test.js (11 tests) 18ms
+ ✓ tests/unit/saldos.test.js (9 tests) 14ms
+
+ Test Files  10 passed (10)
+      Tests  83 passed (83)
+   Start at  09:22:25
+   Duration  12.86s (tests 62%, import 34%, worker 3%, transform 2%)
+
+    Isolate  10 workers spawned · ~171ms startup each (spawn + environment, per file)
+             at least ~1.53s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to /tmp/verif/server/tests/reports/resultados-backend.json
+JUNIT report written to /tmp/verif/server/tests/reports/junit-backend.xml
+ % Coverage report from v8
+
+=============================== Coverage summary ===============================
+Statements   : 90.16% ( 706/783 )
+Branches     : 80.24% ( 333/415 )
+Functions    : 95.53% ( 214/224 )
+Lines        : 93.33% ( 630/675 )
+================================================================================
+== npm run test:e2e
+
+> quadro@1.0.0 test:e2e
+> npm run build && playwright test
+
+
+> quadro@1.0.0 build
+> npm run build --workspace client
+
+
+> @quadro/client@1.0.0 build
+> vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 53 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                       0.65 kB │ gzip:  0.38 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2   20.92 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2       46.75 kB
+dist/assets/index-CdKpaldx.css                                       27.71 kB │ gzip:  6.38 kB
+dist/assets/index-Bwdsb1fr.js                                       324.85 kB │ gzip: 99.40 kB
+
+✓ built in 270ms
+
+Running 16 tests using 1 worker
+
+  ✓   1 [escritorio] › e2e/acceso.spec.js:7:5 › E2E-14 · RNF-01: sin sesión, una página privada redirige a "Ingresar" (1.0s)
+  ✓   2 [escritorio] › e2e/acceso.spec.js:13:5 › E2E-15 · HU-01: credenciales incorrectas muestran un error y no dan acceso (1.3s)
+  ✓   3 [escritorio] › e2e/flujo-principal.spec.js:28:5 › E2E-01 · HU-01: el registro valida los campos y crea la cuenta (1.1s)
+  ✓   4 [escritorio] › e2e/flujo-principal.spec.js:47:5 › E2E-02 · HU-02: crear un grupo exige nombre y deja al creador como administrador (692ms)
+  ✓   5 [escritorio] › e2e/flujo-principal.spec.js:66:5 › E2E-03 · HU-03: el administrador agrega integrantes por correo (666ms)
+  ✓   6 [escritorio] › e2e/flujo-principal.spec.js:81:5 › E2E-04 · HU-04, HU-05: registrar un gasto en partes iguales con vista previa del reparto (4.7s)
+  ✓   7 [escritorio] › e2e/flujo-principal.spec.js:95:5 › E2E-05 · HU-05, RNF-03: porcentajes que no suman 100 % se rechazan; corregidos se guardan (1.5s)
+  ✓   8 [escritorio] › e2e/flujo-principal.spec.js:120:5 › E2E-06 · HU-06, RF-08: los saldos muestran aportes, obligaciones y deudas (276ms)
+  ✓   9 [escritorio] › e2e/flujo-principal.spec.js:130:5 › E2E-07 · HU-08, RNF-09: adjuntar un comprobante a un gasto (700ms)
+  ✓  10 [escritorio] › e2e/flujo-principal.spec.js:142:5 › E2E-08 · HU-07, RF-12: el historial se filtra por categoría (168ms)
+  ✓  11 [escritorio] › e2e/flujo-principal.spec.js:151:5 › E2E-09 · HU-09, RF-10: editar un gasto lo marca como modificado y recalcula los saldos (3.3s)
+  ✓  12 [escritorio] › e2e/flujo-principal.spec.js:165:5 › E2E-10 · HU-09: anular un gasto pide confirmación y lo excluye de los saldos (4.7s)
+  ✓  13 [escritorio] › e2e/flujo-principal.spec.js:187:5 › E2E-11 · HU-10, RF-11: el administrador crea categorías y no se permiten repetidas (497ms)
+  ✓  14 [escritorio] › e2e/flujo-principal.spec.js:199:5 › E2E-12 · HU-13, RF-19: un integrante registra una liquidación y los saldos se actualizan (3.0s)
+  ✓  15 [escritorio] › e2e/flujo-principal.spec.js:228:5 › E2E-13 · RNF-04: una persona que no es integrante no puede ver el grupo (1.4s)
+  ✓  16 [celular] › e2e/celular.spec.js:8:5 › E2E-16 · RNF-07 @celular: menú, saldos y registro de gasto en pantalla de celular (2.3s)
+
+  16 passed (31.5s)

@@ -5,6 +5,10 @@
  * Proyectos: escritorio (1366×860) y celular (390×844) para verificar RNF-07.
  */
 import { defineConfig, devices } from '@playwright/test';
+import { existsSync } from 'node:fs';
+
+// Lee .env (CHROME_PATH, E2E_PORT…) igual que el resto del proyecto.
+if (existsSync('.env')) process.loadEnvFile('.env');
 
 const navegador = process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {};
 const puerto = process.env.E2E_PORT ?? '4100';

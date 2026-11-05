@@ -11,7 +11,7 @@ import { useGrupo } from './Grupo.jsx';
 
 /** HU-13 · RF-19 · CU-11: registrar pagos entre integrantes para saldar deudas. */
 export default function Liquidaciones() {
-  const { grupoId, participantes, miParticipacionId, esAdmin } = useGrupo();
+  const { grupoId, participantes, miParticipacionId, esAdmin, recargarLista } = useGrupo();
   const [parametros, setParametros] = useSearchParams();
   const avisar = useAvisos();
   const lista = useCarga(() => api.liquidaciones(grupoId), [grupoId]);
@@ -55,6 +55,7 @@ export default function Liquidaciones() {
       setDatos(vacio);
       lista.recargar();
       saldos.recargar();
+      recargarLista();
     } catch (error) {
       setErrores(error.campos ?? {});
       setMensaje(Object.keys(error.campos ?? {}).length ? '' : error.message);
@@ -70,6 +71,7 @@ export default function Liquidaciones() {
       avisar('Liquidación anulada. La deuda volvió a quedar pendiente.');
       lista.recargar();
       saldos.recargar();
+      recargarLista();
     } catch (error) {
       avisar(error.message, 'error');
     } finally {

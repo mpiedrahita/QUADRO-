@@ -117,7 +117,10 @@ export default function Categorias() {
             <CampoTexto
               etiqueta="Nombre"
               value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
+              onChange={(e) => {
+                setError('');
+                setNombre(e.target.value);
+              }}
               error={error}
               ayuda="Entre 2 y 40 caracteres. No puede repetirse en el grupo."
               placeholder="Ej.: Publicidad"
@@ -142,7 +145,7 @@ export default function Categorias() {
 
       <Dialogo abierto={Boolean(editando)} alCerrar={() => setEditando(null)} titulo="Renombrar categoría">
         <form className="formulario" onSubmit={renombrar} noValidate>
-          <CampoTexto etiqueta="Nombre" value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} error={errorEdicion} maxLength={40} autoFocus />
+          <CampoTexto etiqueta="Nombre" value={nuevoNombre} onChange={(e) => { setErrorEdicion(''); setNuevoNombre(e.target.value); }} error={errorEdicion} maxLength={40} autoFocus />
           <div className="dialogo__acciones">
             <button type="button" className="boton boton--secundario" onClick={() => setEditando(null)}>
               Cancelar

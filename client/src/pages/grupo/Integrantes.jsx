@@ -121,7 +121,10 @@ export default function Integrantes() {
               etiqueta="Correo de su cuenta en Quadro"
               type="email"
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={(e) => {
+                setErrorCorreo('');
+                setCorreo(e.target.value);
+              }}
               error={errorCorreo}
               ayuda="La persona debe haberse registrado antes en Quadro con este correo."
               placeholder="nombre@correo.com"

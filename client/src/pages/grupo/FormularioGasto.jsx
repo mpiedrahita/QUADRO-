@@ -16,7 +16,7 @@ import { useGrupo } from './Grupo.jsx';
 export default function FormularioGasto() {
   const { gastoId } = useParams();
   const editando = Boolean(gastoId);
-  const { grupoId, participantes, categorias, miParticipacionId, esAdmin, cargandoDatos } = useGrupo();
+  const { grupoId, participantes, categorias, miParticipacionId, esAdmin, cargandoDatos, recargarLista, recargarCategorias } = useGrupo();
   const navegar = useNavigate();
   const avisar = useAvisos();
 
@@ -135,6 +135,8 @@ export default function FormularioGasto() {
       if (editando) await api.editarGasto(grupoId, gastoId, cuerpo);
       else await api.crearGasto(grupoId, cuerpo);
       avisar(editando ? 'Cambios guardados. Los saldos se recalcularon.' : 'Gasto registrado');
+      recargarLista();
+      recargarCategorias();
       navegar(`/grupos/${grupoId}/gastos`);
     } catch (error) {
       setErrores(error.campos ?? {});

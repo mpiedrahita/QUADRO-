@@ -1,0 +1,36 @@
+# Quadro con Docker Compose: PostgreSQL 16 + aplicación.
+# Uso:  docker compose up --build   →  http://localhost:4000
+# Requiere un archivo .env con JWT_SECRET (ver .env.example).
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: quadro
+      POSTGRES_USER: quadro
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-quadro_local}
+    volumes:
+      - datos-quadro:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U quadro -d quadro']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgresql://quadro:${POSTGRES_PASSWORD:-quadro_local}@db:5432/quadro
+      DATABASE_SSL: 'false'
+      JWT_SECRET: ${JWT_SECRET:?Define JWT_SECRET en el archivo .env}
+      JWT_EXPIRES_IN: 8h
+      APP_TZ: America/Bogota
+    ports:
+      - '4000:4000'
+
+volumes:
+  datos-quadro:

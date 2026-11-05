@@ -1,11 +1,12 @@
 /**
  * Configuración de las pruebas E2E (Playwright).
- * Usa el Chrome instalado en el equipo (CHROME_PATH) o el canal "chrome".
+ * Usa el navegador indicado en CHROME_PATH (p. ej. el Chrome instalado en el equipo)
+ * o, si no se define, el Chromium que descarga "npx playwright install chromium".
  * Proyectos: escritorio (1366×860) y celular (390×844) para verificar RNF-07.
  */
 import { defineConfig, devices } from '@playwright/test';
 
-const navegador = process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : { channel: 'chrome' };
+const navegador = process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {};
 const puerto = process.env.E2E_PORT ?? '4100';
 
 export default defineConfig({

@@ -4,6 +4,8 @@ Quadro es una aplicación web responsive para pequeños emprendimientos de dos o
 
 Proyecto académico de Ingeniería de Software, Universidad Católica Luis Amigó (Entregable 3: MVP). Integrantes: Mariana Piedrahita y Sara Melisa Sánchez Vásquez.
 
+ **Demo en línea:** https://quadro-qry3.onrender.com (plan gratuito de Render: si lleva 15 minutos sin uso, la primera carga tarda cerca de un minuto). Cuenta de prueba: ana@demo.quadro.co · Quadro2026.
+ 
 ## Funciones del MVP
 
 | Historia | Función | Requisitos |
@@ -215,8 +217,9 @@ Levanta PostgreSQL 16 y la aplicación en http://localhost:4000.
 3. En https://render.com crea un **Web Service** desde el repositorio:
    - Build command: `npm ci --include=dev && npm run build`
    - Start command: `npm start`
-   - Variables: `NODE_ENV=production`, `DATABASE_URL=<cadena de Neon>`, `DATABASE_SSL=true`, `JWT_SECRET=<secreto>`, `APP_TZ=America/Bogota`
+   - Variables: NODE_ENV=production, NODE_VERSION=22, DATABASE_URL=<cadena de Neon>, DATABASE_SSL=true, JWT_SECRET=<secreto>, APP_TZ=America/Bogota
 4. Render asigna una URL https. La primera vez, el servidor crea las tablas solo.
+5. Para cargar los datos de demostración, cambia una vez el Start command a npm run db:seed && npm start, despliega y vuelve a dejar npm start.
 
 Como opción, Render también acepta el `Dockerfile` del proyecto.
 
